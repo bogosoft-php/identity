@@ -9,7 +9,8 @@ use UnexpectedValueException;
 
 /**
  * A partial implementation of the {@see IPrincipal} contract that represents
- * a principal consisting of
+ * a principal consisting of multiple identities.
+ *
  * @package Bogosoft\Identity
  */
 abstract class MultiIdentityPrincipal implements IPrincipal, IteratorAggregate
