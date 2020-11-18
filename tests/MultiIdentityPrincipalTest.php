@@ -20,11 +20,6 @@ class MultiIdentityPrincipalTest extends TestCase
     {
         return new class extends MultiIdentityPrincipal
         {
-            function __construct()
-            {
-                parent::__construct();
-            }
-
             /**
              * @inheritDoc
              */

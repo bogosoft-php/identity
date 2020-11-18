@@ -16,12 +16,7 @@ use UnexpectedValueException;
 abstract class MultiIdentityPrincipal implements IPrincipal, IteratorAggregate
 {
     private iterable $identities = [];
-    private IIdentitySelector $selector;
-
-    protected function __construct(IIdentitySelector $selector = null)
-    {
-        $this->selector = $selector ?? new DefaultIdentitySelector();
-    }
+    private ?IIdentitySelector $selector = null;
 
     /**
      * Add an identity to the current principal.
@@ -59,7 +54,9 @@ abstract class MultiIdentityPrincipal implements IPrincipal, IteratorAggregate
      */
     function getIdentity(): IIdentity
     {
-        return $this->selector->selectIdentity($this->identities);
+        return $this
+            ->getPrimaryIdentitySelector()
+            ->selectIdentity($this->identities);
     }
 
     /**
@@ -78,7 +75,7 @@ abstract class MultiIdentityPrincipal implements IPrincipal, IteratorAggregate
      */
     function getPrimaryIdentitySelector(): IIdentitySelector
     {
-        return $this->selector;
+        return $this->selector ?? new DefaultIdentitySelector();
     }
 
     /**
